@@ -12,7 +12,7 @@ exports.seoregister = async (req, res) => {
       metaconcial,
       metaauthor,
     });
-
+    
     await adduser.save();
     res.status(201).json(adduser);
 
@@ -28,7 +28,7 @@ exports.getseodata = async (req, res) => {
     const userdata = await seo.find();
     res.status(201).json(userdata);
 
-    //console.log(userdata, "seoalldata");
+    // console.log(userdata, "seoalldata");
   } catch (error) {
     res.status(422).json(error);
   }

@@ -9,6 +9,10 @@ const seoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  metaconcial: {
+    type: String,
+    required: true,
+  },
   metadescription: {
     type: String,
     required: true,
