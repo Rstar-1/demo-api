@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const seoSchema = new mongoose.Schema({
   metatitle: {
-    type: String,
+    type: Number,
     required: true,
   },
   metaauthor: {
