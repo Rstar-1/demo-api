@@ -22,6 +22,7 @@ exports.projectregister = async (req, res) => {
 // Project pagination all data
 exports.getprojectdata = async (req, res) => {
     try {
+        console.log(req.body,"dsds")
         let offset = 0;
         const limit = 6;
         if (req.body.offset) {
@@ -30,7 +31,7 @@ exports.getprojectdata = async (req, res) => {
         const searchobject = {};
         if (req.body.search) {
             Object.assign(searchobject, {
-                name: {
+                subtitle: {
                     $regex: `${req.body.search.toString().trim()}`,
                     $options: "i",
                 },
