@@ -22,33 +22,54 @@ exports.projectregister = async (req, res) => {
 // Project pagination all data
 exports.getprojectdata = async (req, res) => {
     try {
-        console.log(req.body,"dsds")
-        let offset = 0;
-        const limit = 6;
-        if (req.body.offset) {
-            offset = req.body.offset;
-        }
-        const searchobject = {};
-        if (req.body.search) {
-            Object.assign(searchobject, {
+        const { offset, search } = req.body;
+        const searchObject = {};
+
+        if (search) {
+            Object.assign(searchObject, {
                 subtitle: {
-                    $regex: `${req.body.search.toString().trim()}`,
+                    $regex: `${search.toString().trim()}`,
                     $options: "i",
                 },
             });
         }
-        const records = await project.find(searchobject).skip(offset).limit(limit);
-        const totalCount = await project.countDocuments(searchobject);
-        res.status(200).json({
-            data: records,
-            total: totalCount,
-            totalCount: totalCount,
-        });
-    } catch (error) {
-        console.error("Error fetching basic data:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        const projects = await project.find(searchObject)
+            .skip(offset)
+            .limit(6);
+        const totalCount = await project.countDocuments(searchObject);
+        res.json({ projects, totalCount });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
+// exports.getprojectdata = async (req, res) => {
+//     try {
+//         let offset = 0;
+//         const limit = 6;
+//         if (req.body.offset) {
+//             offset = req.body.offset;
+//         }
+//         const searchobject = {};
+//         if (req.body.search) {
+//             Object.assign(searchobject, {
+//                 subtitle: {
+//                     $regex: `${req.body.search.toString().trim()}`,
+//                     $options: "i",
+//                 },
+//             });
+//         }
+//         const records = await project.find(searchobject).skip(offset).limit(limit);
+//         const totalCount = await project.countDocuments(searchobject);
+//         res.status(200).json({
+//             data: records,
+//             total: totalCount,
+//             totalCount: totalCount,
+//         });
+//     } catch (error) {
+//         console.error("Error fetching basic data:", error);
+//         res.status(500).json({ error: "Internal Server Error" });
+//     }
+// };
 
 // Project all data
 exports.getprojectalldata = async (req, res) => {
