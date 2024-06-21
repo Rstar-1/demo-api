@@ -21,14 +21,16 @@ const projectSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  createdAt: {
-    type: Date,
-    default: new Date(),
-  },
-  updatedAt: {
-    type: Date,
-    default: new Date(),
-  },
+  // createdAt: {
+  //   type: Date,
+  //   default: new Date(),
+  // },
+  // updatedAt: {
+  //   type: Date,
+  //   default: new Date(),
+  // },
+}, {
+  timestamps: true, // This will add `createdAt` and `updatedAt` fields
 });
 
 // model
