@@ -94,6 +94,28 @@ exports.updateprojectdata = async (req, res) => {
     }
 };
 
+exports.updateprojectstatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const updateduser = await project.findByIdAndUpdate(
+            id,
+            {
+                status: req.body.status,
+            },
+            {
+                new: true,
+            }
+        );
+
+        console.log(updateduser);
+        res.status(201).json(updateduser);
+    } catch (error) {
+        console.log(error);
+        res.status(422).json(error);
+    }
+};
+
 // Project delete data
 exports.deleteprojectdata = async (req, res) => {
     try {

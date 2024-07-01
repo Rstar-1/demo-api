@@ -25,6 +25,10 @@ module.exports = function (app) {
     uploadToCloud(),
     Controller.projectController.updateprojectdata
   );
+  app.patch(
+    "/updateprojectstatus/:id",
+    Controller.projectController.updateprojectstatus
+  );
   app.delete(
     "/deleteprojectdata/:id",
     Controller.projectController.deleteprojectdata

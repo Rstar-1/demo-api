@@ -56,6 +56,19 @@ exports.getprojectsingledata = async function (req, res) {
   }
 };
 
+exports.updateprojectstatus = async function (req, res) {
+  try {
+    var users = await projectService.updateprojectstatus(req, res);
+
+    return res.status(200).json({
+      status: 200,
+      data: users,
+      message: "Record data successfully",
+    });
+  } catch (error) {
+    error;
+  }
+};
 exports.updateprojectdata = async function (req, res) {
   try {
     var users = await projectService.updateprojectdata(req, res);
